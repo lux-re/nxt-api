@@ -32,8 +32,7 @@ curl https://app.nxt.do/api/public/v1/tasks \
   --request POST \
   --header "Authorization: Bearer $NXT_API_TOKEN" \
   --header "Content-Type: application/json" \
-  --header "Idempotency-Key: groceries-2026-07-16" \
-  --data '{"task":{"text":"Remind me to buy groceries tomorrow at 5pm"}}'
+  --data '{"task":{"text":"Remind me to buy groceries tomorrow at 5pm"},"idempotency_key":"groceries-2026-07-16"}'
 ```
 
 The API responds with `202 Accepted`, a `Location` header, and a task request:
@@ -43,13 +42,14 @@ The API responds with `202 Accepted`, a `Location` header, and a task request:
   "task_request": {
     "id": 42,
     "status": "draft",
+    "poll_url": "https://app.nxt.do/api/public/v1/task_requests/42",
     "created_at": "2026-07-16T12:00:00Z",
     "updated_at": "2026-07-16T12:00:00Z"
   }
 }
 ```
 
-Poll the URL in `Location` until the status is `active` or `failed`. An active request contains the created task or tasks. Reusing the same `Idempotency-Key` with the same input returns the original request instead of creating duplicates; using it with different input returns `409 Conflict`.
+Poll `task_request.poll_url` until the status is `active` or `failed`. An active request contains the created task or tasks. Reusing the same `idempotency_key` with the same input returns the original request instead of creating duplicates; using it with different input returns `409 Conflict`.
 
 ## Tasks
 

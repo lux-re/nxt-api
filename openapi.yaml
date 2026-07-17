@@ -44,14 +44,6 @@ paths:
     post:
       tags: [Tasks]
       summary: Create tasks from natural language
-      parameters:
-        - name: Idempotency-Key
-          in: header
-          required: false
-          description: A client-generated key, no longer than 255 characters, used to safely retry creation.
-          schema:
-            type: string
-            maxLength: 255
       requestBody:
         required: true
         content:
@@ -60,6 +52,10 @@ paths:
               type: object
               required: [task]
               properties:
+                idempotency_key:
+                  type: string
+                  maxLength: 255
+                  description: A client-generated key used to safely retry task creation.
                 task:
                   type: object
                   required: [text]
@@ -75,12 +71,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TaskRequestEnvelope'
         '202':
-          description: Task processing was queued. Poll the URL in the Location header.
-          headers:
-            Location:
-              schema:
-                type: string
-                format: uri
+          description: Task processing was queued. Poll task_request.poll_url for the result.
           content:
             application/json:
               schema:
@@ -447,7 +438,7 @@ components:
               type: integer
     TaskRequest:
       type: object
-      required: [id, status, created_at, updated_at]
+      required: [id, status, poll_url, created_at, updated_at]
       properties:
         id:
           type: integer
@@ -455,6 +446,9 @@ components:
         status:
           type: string
           enum: [draft, processing, active, failed]
+        poll_url:
+          type: string
+          format: uri
         tasks:
           type: array
           items:
