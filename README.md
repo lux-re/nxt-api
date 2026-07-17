@@ -12,8 +12,8 @@ The complete machine-readable contract is in [`openapi.yaml`](openapi.yaml).
 
 ## Get started
 
-1. [Create a nxt account](https://app.nxt.do/signup).
-2. Open [Settings](https://app.nxt.do/settings), create an API token, and copy it immediately. The token is shown only once.
+1. Download nxt from the [Apple App Store](https://apps.apple.com/app/nxt-ai-to-do-lists-tasks/id6717590335) or [Google Play](https://play.google.com/store/apps/details?id=com.nxt.app), then create your account in the app.
+2. Contact [nxt support](mailto:support@nxt.do) to request an API token. API token provisioning is currently handled manually.
 3. Send the token using the Bearer authentication scheme:
 
 ```bash
@@ -21,7 +21,7 @@ curl https://app.nxt.do/api/public/v1/tasks \
   --header "Authorization: Bearer $NXT_API_TOKEN"
 ```
 
-API tokens begin with `nxt_live_`. Treat them like passwords and revoke unused or compromised tokens from Settings.
+API tokens begin with `nxt_live_`. Treat them like passwords. Contact [nxt support](mailto:hello@nxt.do) if a token needs to be revoked or replaced.
 
 ## Create a task
 

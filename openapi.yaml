@@ -2,7 +2,13 @@ openapi: 3.1.0
 info:
   title: nxt API
   version: 1.0.0
-  description: Create and manage nxt tasks and personal context.
+  description: |
+    Create and manage nxt tasks and personal context.
+
+    Create an account using the nxt mobile app, then contact nxt support to request an API token.
+  contact:
+    name: nxt support
+    email: support@nxt.do
 servers:
   - url: https://app.nxt.do/api/public/v1
 security:
