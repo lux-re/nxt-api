@@ -2,6 +2,8 @@
 
 The nxt API lets a user create and manage tasks, retrieve their next recommended task, and manage the personal context nxt uses when organising their work.
 
+Learn more about nxt at [nxt.do](https://nxt.do/).
+
 The API is currently versioned as `v1` and is served from:
 
 ```text
@@ -35,7 +37,7 @@ curl https://app.nxt.do/api/public/v1/tasks \
   --data '{"task":{"text":"Remind me to buy groceries tomorrow at 5pm"},"idempotency_key":"groceries-2026-07-16"}'
 ```
 
-The API responds with `202 Accepted`, a `Location` header, and a task request:
+The API responds with `202 Accepted` and a task request containing its polling URL:
 
 ```json
 {
